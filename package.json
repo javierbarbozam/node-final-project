@@ -1,0 +1,14 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "A Front End interface communicated with a database in MongoDB through a REST API to save, edit or delete Yu Gi Oh cards information",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Javier Barboza Muñoz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
