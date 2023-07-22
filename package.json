@@ -4,11 +4,14 @@
   "description": "A Front End interface communicated with a database in MongoDB through a REST API to save, edit or delete Yu Gi Oh cards information",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "author": "Javier Barboza Muñoz",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongodb": "^5.7.0",
+    "nodemon": "^3.0.1"
   }
 }
