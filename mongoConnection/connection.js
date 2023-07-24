@@ -1,52 +1,21 @@
-const { MongoClient } = require("mongodb");
-
-// Replace the uri string with your connection string.
-const password = "STRqWp63KbDX5ATn";
-const uri = `mongodb+srv://javierbarbozam:${password}@cluster0.3zi7sjt.mongodb.net/?retryWrites=true&w=majority`;
+const mongoose = require('mongoose');
+const movieSchema = require('../schema/Schema')
 
 const urlprueba = 'mongodb+srv://javierbarbozam:LT0gnuK5oXYQGKgN@cluster0.auez1ni.mongodb.net/'
 
-// const client = new MongoClient(uri);
+mongoose.connect(urlprueba, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Conexión exitosa a MongoDB'))
+  .catch(err => console.error('Error al conectar a MongoDB:', err));
+  
+  // cambiar bases de datos
+const database = mongoose.connection.useDb('sample_mflix');
+  
+// const CardModel = database.model('Item', CardSchema, 'movies');
+const ItemModel = database.model('Item', movieSchema, 'movies');
 
-// async function run() {
-//   try {
-//     const database = client.db("yugiohDB");
-//     const data = database.collection("data");
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-
-// run().catch(console.dir);
-
-// module.exports = run
+// module.exports = CardModel
+module.exports = ItemModel
 
 
-// VIDEO DE MONGO DB DRIVER ///
-
-let database;
-
-const getDb = () => {
-  return database;
-}
-
-const connectDb = async () => {
-  try {
-    const client = await MongoClient.connect(uri);
-    database = client.db();
-  } catch (err) {
-    console.log(err);
-  }
-  // MongoClient.connect(uri)
-  //   .then((client) => {
-  //     database = client.db();
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //   })
-}
-
-module.exports = {
-  connectDb, getDb
-}
+// const password = "STRqWp63KbDX5ATn";
+// const uri = `mongodb+srv://javierbarbozam:${password}@cluster0.3zi7sjt.mongodb.net/?retryWrites=true&w=majority`;

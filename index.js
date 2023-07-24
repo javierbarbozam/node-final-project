@@ -1,66 +1,40 @@
-const express = require ('express');
+const express = require('express');
+const router = require('./routes/db-routes');
 
-// init app
-const app = express();
+const app = express()
 
-app.listen(3000, () => {
-  console.log('App initialized at port 3000 :)');
-});
+app.use('/api/movies', router)
 
-const {connectDb, getDb } = require ('./mongoConnection/connection')
+app.listen('3000', () => {
+  console.log('app listening on port 3000')
+})
 
-const initializeDb = async () => {
-  try {
-    await connectDb();
-    const database = getDb();
-    console.log(database);
-    // Aquí puedes continuar con el resto de tu lógica que dependa de la conexión a la base de datos
-  } catch (err) {
-    console.error('Error connecting to the database:', err);
-  }
-};
+// const mongoose = require('mongoose');
+// const urlprueba = 'mongodb+srv://javierbarbozam:LT0gnuK5oXYQGKgN@cluster0.auez1ni.mongodb.net/'
 
-// db connection
-// let database; 
+// mongoose.connect(urlprueba, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log('Conexión exitosa a MongoDB'))
+//   .catch(err => console.error('Error al conectar a MongoDB:', err));
 
-// connectDb((err) => {
-//   if(!err) {
-//     database = getDb();
+
+  
+//   // Definir el esquema de la colección "movies"
+//   const movieSchema = new mongoose.Schema({
+//     title: String,
+//     year: Number,
+//   });
+  
+//   const db = mongoose.connection.useDb('sample_mflix');
+//   const ItemModel = db.model('Item', movieSchema, 'movies');
+
+// // Ruta GET para obtener todos los documentos de la colección "movies"
+// app.get('/api/movies', async (req, res) => {
+//   try {
+//     // Obtener todos los documentos de la colección "movies"
+//     const movies = await ItemModel.find().select('title year');
+//     res.json(movies);
+//   } catch (err) {
+//     console.error('Error al obtener los documentos de la colección:', err);
+//     res.status(500).json({ error: 'Error interno del servidor' });
 //   }
-// })
-
-
-const {MongoClient} = require ('mongodb');
-
-const urlprueba = 'mongodb+srv://javierbarbozam:LT0gnuK5oXYQGKgN@cluster0.auez1ni.mongodb.net/'
-const client = new MongoClient(urlprueba)
-
-async function getCollection () {
-  try {
-    const database = client.db('sample_mflix'); // Specify needed database
-    const collection = database.collection('movies'); // Specify needed collection
-    return collection;
-  } catch (err){
-    console.log(err);
-  } finally {
-    // await client.close(); // explicarle a mi vida <3
-  }
-}
-
-async function prueba () {
-  const database = await getCollection()
-  const query = {title: 'Back to the Future'};
-  const result = await database.findOne(query);
-  console.log(result)
-}
-
-prueba()
-
-// db connection
-// let database; 
-
-// connectDb((err) => {
-//   if(!err) {
-//     database = getDb();
-//   }
-// })
+// });
