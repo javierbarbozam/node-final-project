@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const ItemModel = require('../mongoConnection/connection');
+const CardModel = require('../mongoConnection/connection');
 
-router.get('/id/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const element = await ItemModel.find({_id: id});
+  const element = await CardModel.find({_id: id});
   if (element) {
     res.json(element);
   } else {
@@ -12,9 +12,9 @@ router.get('/id/:id', async (req, res) => {
   }
 });
 
-router.get('/type/:type', async (req, res) => {
+router.get('/:type', async (req, res) => {
   const { type } = req.params;
-  const element = await ItemModel.find({type: type});
+  const element = await CardModel.find({type: type});
   if (element) {
     res.json(element);
   } else {
@@ -24,10 +24,10 @@ router.get('/type/:type', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const cards = await ItemModel.find().select('title');
+    const cards = await CardModel.find().select('title');
     res.json(cards);
   } catch (err) {
-    console.error('Error al obtener los documentos de la colección:', err);
+    console.error('Could not complete task:', err);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
@@ -35,12 +35,34 @@ router.get('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const element = await ItemModel.deleteOne({_id: id});
+    const element = await CardModel.deleteOne({_id: id});
+    res.json(element);
+  } catch (err) {
+    console.error('Could not complete task:', err);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
 
-    if(element) {
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const element = await CardModel.UpdateOne({_id: id}, {$set: req.body});
+    res.json(element);
+  } catch (err) {
+    console.error('Could not complete task:', err);
+    res.status(500).json({ error: 'Could not complete task'});
+  }
+});
 
-    }
-  } catch (err) {console.log(err)}
+router.post('/', async (req, res) => {
+  try {
+    const element = req.body;
+    await CardModel.create(element);
+    res.json(element);
+  } catch (err) {
+    console.error('Could not complete task:', err);
+    res.status(500).json({ error: 'Could not complete task'});
+  }
 });
 
 module.exports = router;

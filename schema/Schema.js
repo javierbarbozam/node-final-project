@@ -10,10 +10,4 @@ const CardSchema = new mongoose.Schema({
   description: String
 });
 
- // schema de prueba
- const movieSchema = new mongoose.Schema({
-  title: String,
-  year: Number,
-});
-
-module.exports = movieSchema;
+module.exports = CardSchema;
