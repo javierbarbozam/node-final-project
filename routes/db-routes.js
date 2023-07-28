@@ -24,7 +24,7 @@ router.get('/:type', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const cards = await CardModel.find().select('title');
+    const cards = await CardModel.find({});
     res.json(cards);
   } catch (err) {
     console.error('Could not complete task:', err);
