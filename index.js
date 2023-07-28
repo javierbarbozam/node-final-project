@@ -7,7 +7,7 @@ const liveReloadServer = livereload.createServer();
 liveReloadServer.server.once("connection", () => {
   setTimeout(() => {
     liveReloadServer.refresh("/");
-  }, 100);
+  }, 3000);
 });
 
 const app = express();
