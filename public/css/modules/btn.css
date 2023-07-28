@@ -1,0 +1,14 @@
+.btn {
+  width: 100px;
+  height: 35px;
+  background-color: rgb(201,201,201);
+  border: solid 2px rgb(207, 160, 38);
+  outline: solid 2px rgb(0, 0, 0);
+  font-size: 16px;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

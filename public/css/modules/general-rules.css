@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Times New Roman';
+}
+
+body {
+  background-color: rgb(34, 34, 34);
+}
+
+.logo-wrapper {
+  height: 10vh;
+  margin: 30px 0 40px;
+}
+
+.logo {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.container {
+  padding: 0 40px;
+}
