@@ -1,8 +1,9 @@
 .card-wrapper {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
   margin-top: 60px;
+  width: fit-content;
 }
 
 .card-item {
@@ -10,6 +11,33 @@
   flex-direction: column;
 }
 
+.card-item__img {
+  width: 300px;
+}
+
 .card-item__title {
-  
+  font-size: 25px;
+  font-weight: 700;
+  display: block;
+  margin: 10px 0;
+  color: rgb(201, 201, 201);
+}
+
+.card-item__title::first-letter {
+  text-transform: uppercase;
+}
+
+.card-item__txt {
+  color: rgb(201, 201, 201);
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card-item__txt::first-letter {
+  text-transform: uppercase;
+}
+
+.card-item__btn {
+  display: flex;
+  gap: 10px;
 }

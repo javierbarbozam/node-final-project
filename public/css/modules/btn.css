@@ -2,9 +2,17 @@
   width: 100px;
   height: 35px;
   background-color: rgb(201,201,201);
-  border: solid 2px rgb(207, 160, 38);
+  border: solid 3px rgb(207, 160, 38);
   outline: solid 2px rgb(0, 0, 0);
   font-size: 16px;
+}
+
+.btn:hover {
+  background-color: rgb(161, 161, 161);
+}
+
+.btn:active {
+  transform: scale(0.9);
 }
 
 .btn-wrapper {
