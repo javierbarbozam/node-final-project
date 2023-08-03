@@ -1,52 +1,79 @@
-function loadData() {
+import { createForm } from "./modules/form.js";
+
+const createCard = (element) => {
+  const card = $("<li>").addClass("card-item");
+  const cardDescription = $("<ul>").addClass("card-item-info");
+
+  const cardImg = $("<img>").attr({
+    src: "../../src/assets/card-bg.png",
+    class: "card-item__img",
+  });
+
+  const cardTitle = $("<span>").text(element.name).addClass("card-item__title");
+
+  const description = $("<p>")
+    .addClass("card-item__txt")
+    .text(element.description);
+
+  const type = $("<p>")
+    .addClass("card-item__txt")
+    .text(`Type: ${element.type}`);
+
+  const attackPoints = $("<p>")
+    .addClass("card-item__txt")
+    .text(`Attack: ${element.attack} pts`);
+
+  const defensePoints = $("<p>")
+    .addClass("card-item__txt")
+    .text(`Defense: ${element.defense} pts`);
+
+  const btnContainer = $("<div>").addClass("card-item__btn");
+
+  const deleteButton = $("<button>")
+    .text("Delete")
+    .addClass("btn")
+    .on("click", () => deleteCard(element._id));
+
+  const editButton = $("<button>")
+    .text("Edit")
+    .addClass("btn")
+    .on("click", () =>
+      createForm(() => {
+        updateCard(element._id);
+      })
+    );
+
+  btnContainer.append(editButton, deleteButton);
+
+  cardDescription.append(
+    cardTitle,
+    description,
+    type,
+    attackPoints,
+    defensePoints
+  );
+  card.append(cardImg, cardDescription, btnContainer);
+
+  return card
+};
+
+function loadCards() {
   $.get("/api/cards", function (data) {
+
+    const resetBtn = $('.btn-reset');
+    if (resetBtn) {
+      resetBtn.remove();
+    }
     $("#cardWrapper").empty();
 
-    data.forEach(function (card) {
-      const cardItem = $("<li>").addClass('card-item');
-
-      const cardImg = $('<img>')
-        .attr({
-          src: "../../src/assets/card-bg.png"
-        })
-        
-      const cardTitle = $("<span>")
-        .text(card.name)
-        .addClass('card-item__title')
-
-      const deleteButton = $("<button>")
-        .text("Eliminar")
-        .addClass("btn")
-        .click(() => deleteCard(card._id));
-
-      const editButton = $("<button>")
-        .text("Editar")
-        .addClass("btn")
-        .click(() => console.log(card));
-
-      cardItem.append(cardImg, cardTitle, deleteButton, editButton);
-      $("#cardWrapper").append(cardItem);
+    data.forEach(function (element) {
+      const card = createCard(element);
+      $("#cardWrapper").append(card);
     });
-    // products.forEach(function (product) {
-    //   const listItem = $("<li>");
-    //   const productName = $("<div>").text(product.name);
-    //   const deleteButton = $("<button>")
-    //     .text("Eliminar")
-    //     .addClass("delete-button")
-    //     .click(() => deleteCard(product.id));
-    //   const editButton = $("<button>")
-    //     .text("Editar")
-    //     .addClass("edit-button")
-    //     .click(() => editProduct(product.id));
-
-    //   listItem.append(productName, deleteButton, editButton);
-
-    //   $("#productList").append(listItem);
-    // });
   });
 }
 
-function postData () {
+function postCard() {
   const formDataArray = $(".card-form").serializeArray();
   const formDataObject = formDataArray.reduce((result, current) => {
     result[current.name] = current.value;
@@ -55,8 +82,34 @@ function postData () {
 
   $.post("/api/cards", formDataObject, () => {
     $(".card-form")[0].reset();
-    loadData();
+    loadCards();
   });
 }
 
-export {postData, loadData}
+function deleteCard(id) {
+  $.ajax({
+    url: "/api/cards/" + id,
+    type: "DELETE",
+    success: function () {
+      loadCards();
+    },
+  });
+}
+
+function updateCard(id) {
+  const formDataArray = $(".card-form").serializeArray();
+  const formDataObject = formDataArray.reduce((result, current) => {
+    result[current.name] = current.value;
+    return result;
+  }, {});
+  $.ajax({
+    url: "/api/cards/" + id,
+    type: "PUT",
+    data: formDataObject,
+    success: function () {
+      loadCards();
+    },
+  });
+}
+
+export { postCard, loadCards, createCard };

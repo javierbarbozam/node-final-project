@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const CardModel = require('../mongoConnection/connection');
 
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  const element = await CardModel.find({_id: id});
+router.get('/name/:name', async (req, res) => {
+  const { name } = req.params;
+  const element = await CardModel.findOne({name: name});
   if (element) {
     res.json(element);
   } else {
@@ -12,7 +12,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.get('/:type', async (req, res) => {
+router.get('/type/:type', async (req, res) => {
   const { type } = req.params;
   const element = await CardModel.find({type: type});
   if (element) {
@@ -46,7 +46,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const element = await CardModel.UpdateOne({_id: id}, {$set: req.body});
+    const element = await CardModel.findByIdAndUpdate({_id: id}, req.body, {new: true});
     res.json(element);
   } catch (err) {
     console.error('Could not complete task:', err);

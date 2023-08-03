@@ -23,3 +23,10 @@ body {
 .container {
   padding: 0 40px;
 }
+
+.not-found {
+  color: rgb(201, 201, 201);
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: center;
+}

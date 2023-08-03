@@ -11,9 +11,19 @@
       <img src="./src/assets/logo.png" alt="yugioh logo" class="logo" />
     </div>
     <div class="container">
-      <div class="btn-wrapper">
+      <div class="searchbar-wrapper">
+        <form action="" id="search-form">
+          <label for="name">Search by name:</label>
+          <input type="text" name="name" id="name" placeholder="Type a name">
+          <label for="type">Search by type:</label>
+          <select name="type" id="type">
+            <option value="magic">magic</option>
+            <option value="monster">monster</option>
+            <option value="trap">trap</option>
+          </select>
+          <button class="btn" type="submit">Search</button>
+        </form>
         <button class="btn" id="add-card-btn">Add a card</button>
-        <button class="btn" id="search-card-btn">Search a card</button>
       </div>
       <ul class="card-wrapper" id="cardWrapper"></ul>
     </div>
