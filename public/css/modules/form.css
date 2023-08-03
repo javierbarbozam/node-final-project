@@ -21,7 +21,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(109, 62, 26, 0.502);
-  padding: 40px 20px;
+  padding: 40px 40px;
 }
 
 .form-box {
@@ -50,6 +50,13 @@
   border: none;
   padding: 10px;
   font-size: 18px;
+}
+
+.btn-wrapper {
+  display: flex;
+  gap: 30px;
+  margin: 40px auto 0;
+  width: fit-content;
 }
 
 @keyframes initFormModal {

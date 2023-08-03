@@ -28,13 +28,16 @@ function createForm(callback) {
     </div>
   </div>
   <label class="form-label" for="description">Add the card description</label>
-  <textarea name="description" cols="10" rows="10"></textarea>`
+  <textarea name="description" cols="10" rows="4"></textarea>`
   );
+  const btnWrapper = $('<div>')
+    .addClass('btn-wrapper')
 
   const closeBtn = $("<button>")
     .attr("type", "button")
     .text("Close")
     .addClass("close-form-btn")
+    .addClass("btn")
     .on("click", () => {
       container.empty();
       container.css("display", "none")
@@ -44,6 +47,7 @@ function createForm(callback) {
     .attr("type", "submit")
     .text("Send")
     .addClass("submit-form-btn")
+    .addClass("btn")
     .on("click", (e) => {
       e.preventDefault()
       container.css("display", "none")
@@ -54,8 +58,10 @@ function createForm(callback) {
     .attr("type", "reset")
     .text("Reset")
     .addClass("submit-form-btn")
-  
-  form.append(submitBtn, resetBtn, closeBtn)
+    .addClass("btn")
+
+  btnWrapper.append(submitBtn, resetBtn, closeBtn)
+  form.append(btnWrapper)
   container.append(form);
 }
 

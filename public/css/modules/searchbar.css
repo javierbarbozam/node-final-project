@@ -3,3 +3,27 @@
   justify-content: center;
   gap: 10px;
 }
+
+.label-searchbar {
+  color: rgb(201, 201, 201);
+  font-size: 16px;
+}
+
+#search-form {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.input-searchbar {
+  height: 35px;
+  background-color: rgb(201, 201, 201);
+  color: black;
+  border: none;
+  padding: 0 10px;
+  font-size: 16px;
+} 
+
+.input-searchbar::placeholder {
+  color: black;
+}

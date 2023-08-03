@@ -7,6 +7,12 @@
   font-size: 16px;
 }
 
+.btn-reset {
+  background-color: rgb(207, 160, 38);
+  border: solid 2px rgb(0, 0, 0);
+  outline: solid 1px white;
+}
+
 .btn:hover {
   background-color: rgb(161, 161, 161);
 }
